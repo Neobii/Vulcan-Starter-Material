@@ -1,0 +1,20 @@
+# see http://docs.vulcanjs.org/packages
+
+vulcan:core@=1.14.1
+
+############ Language Packages ############
+
+vulcan:i18n-en-us@=1.14.1
+
+############ Accounts Packages ############
+vulcan:accounts
+accounts-password@1.6.0
+# accounts-twitter
+# accounts-facebook
+
+vulcan:ui-material
+vulcan:debug
+vulcan:forms
+
+ui-material-vulcan
+# vulcan:backoffice
