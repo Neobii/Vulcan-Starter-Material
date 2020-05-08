@@ -11,7 +11,7 @@ input String_Selector {
   #_ilike: String
   _in: [String!]
   _is_null: Boolean
-  #_like: String
+  _like: String
   #_lt: String
   #_lte: String
   #_neq: String
@@ -23,8 +23,9 @@ input String_Selector {
 }
 
 input String_Array_Selector {
-  contains: String_Selector
-  # contains_all: [String_Selector]
+  _in: [String!]
+  # _contains: String_Selector
+  # _contains_all: [String_Selector]
 }
 
 input Int_Selector {
@@ -116,6 +117,52 @@ input IntlValueInput{
   value: String
 }
 directive @intl on FIELD_DEFINITION
+
+  input AuthPasswordInput {
+    email: String
+    password: String
+  }
+  type AuthResult {
+    token: String
+    userId: String
+  }
+  type LogoutResult {
+    userId: String
+  }
+
+  input SignupInput {
+    email: String
+    password: String
+  }
+  type SignupResult {
+    userId: String
+  }
+
+  input SetPasswordInput {
+    newPassword: String
+  }
+
+  #type SetPasswordResult # Will auth user again so we reuse AuthResult atm
+
+  input ResetPasswordInput {
+    token: String
+    newPassword: String
+  }
+  type ResetPasswordResult {
+    userId: String
+  }
+
+  input VerifyEmailInput {
+    token: String
+  }
+  type VerifyEmailResult {
+    userId: String
+  }
+
+  input AuthEmailInput {
+    email: String
+  }
+
 
 # A user object
 type User {
@@ -254,7 +301,7 @@ input UserFilterInput {
   avatarUrl: String_Selector
   slug: String_Selector
   twitterUsername: String_Selector
-
+  groups: String_Array_Selector
   pageUrl: String_Selector
   pagePath: String_Selector
   editUrl: String_Selector
@@ -612,7 +659,7 @@ input CallbackSelectorUniqueInput {
 
 
 type Query {
-  SiteData: Site
+  siteData: Site
   
   currentUser: User
   
@@ -632,6 +679,22 @@ type Query {
   
 
 type Mutation {
+  authenticateWithPassword(input: AuthPasswordInput): AuthResult
+
+  logout: LogoutResult
+
+  signup(input: SignupInput): SignupResult
+
+  setPassword(input: SetPasswordInput): AuthResult
+
+  sendResetPasswordEmail(input: AuthEmailInput): Boolean
+
+  resetPassword(input: ResetPasswordInput): ResetPasswordResult
+
+  sendVerificationEmail(input: AuthEmailInput): Boolean
+
+  verifyEmail(input: VerifyEmailInput): VerifyEmailResult
+
   # Mutation for creating new User documents
   createUser(
   input: CreateUserInput,
