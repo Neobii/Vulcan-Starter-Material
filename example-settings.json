@@ -1,0 +1,18 @@
+{
+  "public": {
+
+    "title": "_sh_",
+    "tagline":"_sh_",
+
+    "faviconUrl": "/favicon.ico",
+
+    "locale": "en",
+    "muiTheme": "MaterialUIStarter"
+
+  },
+  "apolloServer": {
+    "corsWhitelist": [],
+    "corsEnableAll": false
+  },
+  "defaultEmail": "shielkwamm@gmail.com"
+}

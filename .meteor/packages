@@ -12,9 +12,12 @@ accounts-password@1.6.0
 # accounts-twitter
 # accounts-facebook
 
-vulcan:ui-material
-vulcan:debug
-vulcan:forms
+#vulcan:debug
+#vulcan:forms
+
+fourseven:scss
 
 ui-material-vulcan
+
 # vulcan:backoffice
+
